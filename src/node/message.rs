@@ -3,7 +3,7 @@ use serde_json;
 
 pub trait FLSMsg
 where
-    Self: Serialize + for<'de> Deserialize<'de> + Sized,
+    Self: Serialize + for<'de> Deserialize<'de> + Sized + Clone,
 {
     fn create_packet(&self) -> String {
         serde_json::to_string(self).unwrap()
