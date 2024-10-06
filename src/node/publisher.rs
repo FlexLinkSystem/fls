@@ -9,11 +9,11 @@ pub struct Publisher<T : FLSMsg>
 }
 
 impl<T : FLSMsg> Publisher<T> {
-    pub fn new(node_name : String, topic_name : String)->Publisher<T>
+    pub fn new(node_name : String, topic_name : String, id : usize)->Publisher<T>
     {
         let (t, r) = std::sync::mpsc::channel::<String>();
 
-        let port = name_to_port(node_name.clone());
+        let port = name_to_port(node_name.clone()) + id;
         let dest_port = name_to_port(topic_name);
 
         std::thread::spawn(move ||{
